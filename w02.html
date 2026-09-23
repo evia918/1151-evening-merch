@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>W2 找到你的 IP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;600;700&display=swap">
+<style>
+:root{
+  --ground:#F2F6F5; --surface:#FFFFFF; --ink:#16252A; --muted:#55676B;
+  --line:#D3DEDC; --accent:#0F7C78; --accent-ink:#FFFFFF; --soft:#E0F0ED;
+  --warn:#A64B22; --warn-soft:#FBEDE4; --navy:#1B2A4A;
+  --display:"LXGW WenKai TC","Kaiti TC","DFKai-SB",serif;
+  --body:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ground:#0E181A; --surface:#15242A; --ink:#E2ECEA; --muted:#9BB0B2;
+  --line:#28424A; --accent:#4DBDB4; --accent-ink:#0B1B1D; --soft:#133639;
+  --warn:#E69A6C; --warn-soft:#3A2419; --navy:#C9D6F0;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0E181A; --surface:#15242A; --ink:#E2ECEA; --muted:#9BB0B2;
+  --line:#28424A; --accent:#4DBDB4; --accent-ink:#0B1B1D; --soft:#133639;
+  --warn:#E69A6C; --warn-soft:#3A2419; --navy:#C9D6F0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.75 var(--body);-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding-inline:18px;padding-block:28px 64px}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;text-wrap:balance;line-height:1.3;margin:0}
+h1{font-size:clamp(34px,8vw,48px);color:var(--navy)}
+h2{font-size:26px;color:var(--navy);margin-bottom:12px}
+h3{font-size:19px}
+p{margin:0 0 12px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.topbar a{color:var(--muted);text-decoration:none}
+.topbar a:hover{color:var(--accent)}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--accent);margin-bottom:8px;display:block}
+.lead{font-size:18px;color:var(--muted);margin-top:14px;max-width:34em}
+section{margin-top:44px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.callout{background:var(--soft);border-radius:10px;padding:14px 18px;margin:14px 0}
+.callout.warn{background:var(--warn-soft)}
+.callout b.tag{display:block;font-size:13px;letter-spacing:.06em;color:var(--accent);margin-bottom:4px}
+.callout.warn b.tag{color:var(--warn)}
+.callout p:last-child{margin:0}
+/* 主線：真實的順序，所以用編號 */
+.road{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.road li{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px dashed var(--line)}
+.road li:last-child{border-bottom:0}
+.road .wk{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.road .tag{font-size:12px;padding:1px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.road .tag.count{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.road li.now .wk{color:var(--accent);font-weight:600}
+.road li.now{background:linear-gradient(90deg,var(--soft),transparent 70%)}
+@media (max-width:480px){.road li{grid-template-columns:58px 1fr}.road .tag{grid-column:2;justify-self:start}}
+.tbl{overflow-x:auto;margin:6px 0 14px}
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--surface)}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;letter-spacing:.04em;color:var(--muted);font-weight:600;background:var(--ground)}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.route{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.route.pick{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.route .n{font-family:var(--display);font-size:22px;color:var(--accent)}
+.route p{font-size:15px;margin:6px 0 0;color:var(--muted)}
+.route .hint{display:inline-block;margin-top:8px;font-size:12px;color:var(--accent)}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:12px;counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:40px 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.steps li::before{content:counter(st);font-family:var(--display);font-size:26px;line-height:1;color:var(--accent)}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:15px}
+.check{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 4px;cursor:pointer}
+.check input{width:20px;height:20px;margin-top:4px;accent-color:var(--accent);flex:none}
+.check input:checked+span{color:var(--muted);text-decoration:line-through}
+.finale{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:20px;align-items:center}
+@media (max-width:600px){.finale{grid-template-columns:1fr}}
+.finale svg{width:100%;height:auto;max-width:300px}
+.finale .dim{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.kbd{font-family:var(--mono);font-size:.9em;background:var(--soft);padding:1px 6px;border-radius:4px}
+.next{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}
+footer{margin-top:40px;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.road li.now{transition:background .3s}}
+table.kv td:first-child{white-space:nowrap;font-weight:600}
+</style>
+</head>
+<body>
+<main class="wrap">
+<!--title: W2 找到你的 IP-->
+<header class="topbar"><a href="index.html">衍生式產品設計｜進修部 115-1</a><span>第 2 週 · 9/24（四）</span></header>
+
+<span class="eyebrow">WEEK 02 · 選題情緒板</span>
+<h1>找到你的 IP</h1>
+<p class="lead">今天不用會畫圖，也不用開任何設計軟體。你只要用手機找圖，替這學期挑一個角色題目，最後寫下 3 個關鍵字。</p>
+
+<section id="finale">
+  <h2>這學期的終點</h2>
+  <div class="finale">
+    <svg viewBox="0 0 297 210" role="img" aria-label="A4 紙上的 55mm 立方體盲盒展開圖與 50mm 角色小卡">
+      <rect x="0.5" y="0.5" width="296" height="209" fill="none" stroke="var(--line)" stroke-dasharray="3 3"/>
+      <g transform="translate(6 8)">
+        <path d="M0 76 L12 72 L12 123 L0 119 Z" fill="var(--soft)" stroke="var(--muted)" stroke-width=".8"/>
+        <rect x="12" y="70" width="55" height="55" fill="var(--surface)" stroke="var(--ink)" stroke-width=".9"/>
+        <rect x="67" y="70" width="55" height="55" fill="var(--soft)" stroke="var(--ink)" stroke-width=".9"/>
+        <rect x="122" y="70" width="55" height="55" fill="var(--surface)" stroke="var(--ink)" stroke-width=".9"/>
+        <rect x="177" y="70" width="55" height="55" fill="var(--surface)" stroke="var(--ink)" stroke-width=".9"/>
+        <rect x="67" y="15" width="55" height="55" fill="var(--surface)" stroke="var(--ink)" stroke-width=".9"/>
+        <path d="M70 15 Q70 0 82 0 L107 0 Q119 0 119 15" fill="var(--surface)" stroke="var(--ink)" stroke-width=".9"/>
+        <rect x="177" y="125" width="55" height="55" fill="var(--surface)" stroke="var(--ink)" stroke-width=".9"/>
+        <path d="M180 180 Q180 195 192 195 L217 195 Q229 195 229 180" fill="var(--surface)" stroke="var(--ink)" stroke-width=".9"/>
+        <g stroke="var(--accent)" stroke-width=".9" stroke-dasharray="3 2">
+          <line x1="12" y1="70" x2="12" y2="125"/><line x1="67" y1="70" x2="67" y2="125"/>
+          <line x1="122" y1="70" x2="122" y2="125"/><line x1="177" y1="70" x2="177" y2="125"/>
+          <line x1="67" y1="70" x2="122" y2="70"/><line x1="177" y1="125" x2="232" y2="125"/>
+        </g>
+        <g font-family="Noto Sans TC, sans-serif" font-size="8.5" fill="var(--ink)" text-anchor="middle">
+          <text x="94.5" y="100">正面</text><text x="94.5" y="111" font-size="7" fill="var(--muted)">主視覺</text>
+          <text x="39.5" y="100">側面</text><text x="39.5" y="111" font-size="7" fill="var(--muted)">系列 4 款</text>
+          <text x="149.5" y="100">側面</text><text x="149.5" y="111" font-size="7" fill="var(--muted)">隱藏款剪影</text>
+          <text x="204.5" y="100">背面</text><text x="204.5" y="111" font-size="7" fill="var(--muted)">標準字</text>
+          <text x="94.5" y="46">上蓋</text><text x="204.5" y="156">底蓋</text>
+        </g>
+        <rect x="238" y="20" width="47" height="47" rx="3" fill="var(--soft)" stroke="var(--accent)" stroke-width=".9"/>
+        <text x="261.5" y="47" font-family="Noto Sans TC, sans-serif" font-size="8.5" fill="var(--accent)" text-anchor="middle">小卡</text>
+      </g>
+    </svg>
+    <div>
+      <p><b>一個你自己設計、拆得開的盲盒。</b>55mm 立方體，展開圖和一張 50mm 角色小卡剛好排在同一張 A4 上。</p>
+      <p>盒子裡的小卡是你角色的隨機一款，期末那天大家互相抽別人的盒子來拆。</p>
+      <p class="dim">虛線＝摺線 · 實線＝裁切線 · 列印時選「實際大小 100%」</p>
+    </div>
+  </div>
+</section>
+
+<section id="road">
+  <h2>從今天到期末</h2>
+  <p>每一步都會用到上一步的東西，所以不會有做了又用不到的作業。</p>
+  <div class="panel">
+    <ol class="road">
+      <li class="now"><span class="wk">W2</span><span>選題情緒板＋3 個關鍵字</span><span class="tag">素材</span></li>
+      <li><span class="wk">W3–W5</span><span>AI 生成你的角色：1 個角色 × 4 種姿勢，再做 1 個隱藏款剪影；去背、取色、命名</span><span class="tag">素材</span></li>
+      <li><span class="wk">W6–W8</span><span>用 Illustrator 做角色的標準字</span><span class="tag">全班必做</span></li>
+      <li><span class="wk">W9</span><span>期中進度檢核</span></li>
+      <li><span class="wk">W10–W12</span><span>明信片 或 A3 海報，擇一</span><span class="tag count">第 1 件</span></li>
+      <li><span class="wk">W13–W15</span><span>盲盒外包裝＋角色小卡，印出、裁切、摺好</span><span class="tag count">第 2 件</span></li>
+      <li><span class="wk">W18</span><span>期末展示，互相抽盒開箱</span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="rules">
+  <h2>這門課怎麼算</h2>
+  <div class="callout"><b class="tag">先講最重要的</b><p>評分只看<b>有沒有完成、有沒有照流程做</b>，不評美感。</p></div>
+  <div class="tbl"><table class="kv">
+    <thead><tr><th>項目</th><th>比例</th><th>包含什麼</th></tr></thead>
+    <tbody>
+      <tr><td>課堂參與</td><td class="num">30%</td><td>每週課堂上的小產出有交就算</td></tr>
+      <tr><td>素材與組件</td><td class="num">30%</td><td>情緒板、角色圖、色票、標準字</td></tr>
+      <tr><td>第 1 件</td><td class="num">15%</td><td>明信片或海報，擇一</td></tr>
+      <tr><td>第 2 件</td><td class="num">25%</td><td>盲盒外包裝＋小卡（必交）</td></tr>
+      <tr><td>加分</td><td class="num">+3</td><td>海報自己到校內書局印成 A3 實體</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tbl"><table class="kv">
+    <thead><tr><th>規則</th><th>內容</th></tr></thead>
+    <tbody>
+      <tr><td>件數</td><td>每人 2 件：盲盒必交，另外從明信片、海報中選一件</td></tr>
+      <tr><td>組隊</td><td>1–3 人都可以，自己一組也完全沒問題。同組可以共用角色與素材，但盲盒的每一面或每一款要寫清楚是誰負責</td></tr>
+      <tr><td>回家做什麼</td><td>只有 AI 生圖可以回家做（每天免費張數有限，本來就要分幾天）。排版與完稿都在課堂上完成</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="routes">
+  <h2>三條路線，選一條</h2>
+  <div class="routes">
+    <div class="route"><span class="n">一</span> <b>自創角色</b><p>從零想一個角色。適合已經有點子、或平常喜歡畫圖的人。</p></div>
+    <div class="route pick"><span class="n">二</span> <b>生活原型</b><p>從你生活裡的東西出發：自己的貓、家鄉、公司裡某種人、一句口頭禪。</p><span class="hint">沒有想法就選這條</span></div>
+    <div class="route"><span class="n">三</span> <b>臨摹練習</b><p>用你喜歡的既有 IP 練技術。作品只留在課堂裡。</p></div>
+  </div>
+  <div class="callout warn"><b class="tag">路線三的公開規則</b>
+    <p>臨摹作品僅限課堂練習。若要在 IG、Threads 等平台公開，須先附上原作者或官方公開的二創規範截圖，並遵守其規定。<b>標註原作者不等於取得授權。</b></p>
+  </div>
+</section>
+
+<section id="today">
+  <h2>今天的任務：一頁選題情緒板</h2>
+  <p>用 Google 簡報開一頁 16:9，手機 App 或教室電腦都可以。版面不評分，圖排整齊就好。</p>
+  <ol class="steps">
+    <li><div><b>蒐集 9–12 張圖</b><span>分成三類，每類至少 3 張：角色長相（臉型、身形、表情）、畫風質感（線條、配色、材質）、商品樣貌（盲盒、公仔、周邊）。Pinterest、IG、盲盒品牌官網都是好來源。</span></div></li>
+    <li><div><b>每張圖寫一句理由</b><span>「我留這張是因為＿＿」。寫不出理由的圖就刪掉。</span></div></li>
+    <li><div><b>寫下 3 個關鍵字</b><span>形容外型或氣質的詞，例如「圓滾滾」「短手短腳」「厭世臉」。這 3 個詞就是下週 AI 提示詞的第一句。</span></div></li>
+    <li><div><b>勾選路線、寫上組員</b><span>在頁面角落寫「路線一／二／三」和組員名字，自己一組就寫自己。</span></div></li>
+  </ol>
+  <h3 style="margin-top:26px">常見的三個卡關</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>狀況</th><th>為什麼不行</th><th>改成</th></tr></thead>
+    <tbody>
+      <tr><td>只放 3、4 張</td><td>看不出你到底喜歡什麼</td><td>三類各 3 張，至少 9 張</td></tr>
+      <tr><td>全部是同一個 IP 的官方圖</td><td>最後只能照抄</td><td>角色、畫風、商品分開找</td></tr>
+      <tr><td>關鍵字寫「可愛」「好看」</td><td>每個人的可愛都不一樣，AI 也聽不懂</td><td>寫具體外型：圓臉、大頭小身、瞇瞇眼</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="submit">
+  <h2>交件前自己勾一遍</h2>
+  <div class="panel">
+    <ul class="check">
+      <li><label><input type="checkbox" id="c1"><span>9 張以上，角色、畫風、商品三類都有</span></label></li>
+      <li><label><input type="checkbox" id="c2"><span>每張圖旁邊都有一句理由</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span>3 個關鍵字，都是具體的形容詞</span></label></li>
+      <li><label><input type="checkbox" id="c4"><span>寫了路線和組員</span></label></li>
+      <li><label><input type="checkbox" id="c5"><span>匯出 PDF 或 JPG，檔名為 <span class="kbd">座號_姓名_W02情緒板</span></span></label></li>
+    </ul>
+  </div>
+  <p style="margin-top:12px;color:var(--muted);font-size:15px">當堂做完就當堂交；沒做完的，W3 上課前交。</p>
+</section>
+
+<section class="next" id="next">
+  <span class="eyebrow">下週 · W3 · 10/1（四）</span>
+  <h2>用 AI 生出你的角色</h2>
+  <p>回家先確認你能登入 <b>ChatGPT</b> 或 <b>Gemini</b> 的免費版，哪一個都可以。今天寫的 3 個關鍵字記得帶來。</p>
+</section>
+
+<footer>衍生式產品設計（進修部）· 弘光科技大學 多媒體遊戲發展與應用系 · 115 學年度第 1 學期</footer>
+
+<script>
+// 勾選狀態只存在這台裝置（方便學生自己核對），讀寫失敗時照常運作
+document.querySelectorAll('.check input').forEach(function(el){
+  var key='w02-'+el.id;
+  try{ el.checked = localStorage.getItem(key)==='1'; }catch(e){}
+  el.addEventListener('change',function(){ try{ localStorage.setItem(key, el.checked?'1':'0'); }catch(e){} });
+});
+</script>
+
+</main>
+</body>
+</html>
