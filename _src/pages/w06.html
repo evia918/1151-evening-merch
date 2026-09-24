@@ -1,0 +1,111 @@
+<!--title: W6 第一次打開 Illustrator-->
+<header class="topbar"><a href="index.html">衍生式產品設計｜進修部 115-1</a><span>第 6 週 · 10/22（四）BC 節 · MB209</span></header>
+
+<span class="eyebrow">WEEK 06 · Illustrator 入門</span>
+<h1>第一次打開 Illustrator</h1>
+<p class="lead">今天只學 6 個工具，用你角色的名字練習。目標是做得出東西，不是認識所有功能。</p>
+
+<section id="why">
+  <h2>為什麼標準字用 Illustrator</h2>
+  <div class="finale">
+    <svg viewBox="0 0 300 130" role="img" aria-label="同一個圓形放大後：點陣圖邊緣出現鋸齒，向量圖邊緣依然平滑">
+      <g font-family="Noto Sans TC, sans-serif" font-size="11" fill="var(--muted)" text-anchor="middle">
+        <text x="72" y="124">Photoshop：點陣</text><text x="228" y="124">Illustrator：向量</text>
+      </g>
+      <g fill="var(--accent)">
+        <path d="M52 20h40v8h8v8h8v40h-8v8h-8v8H52v-8h-8v-8h-8V36h8v-8h8z"/>
+      </g>
+      <circle cx="228" cy="60" r="44" fill="var(--accent)"/>
+      <g fill="var(--surface)" stroke="var(--ink)" stroke-width="1.2">
+        <rect x="225" y="13" width="6" height="6"/><rect x="225" y="101" width="6" height="6"/>
+        <rect x="181" y="57" width="6" height="6"/><rect x="269" y="57" width="6" height="6"/>
+      </g>
+    </svg>
+    <div>
+      <p><b>Photoshop 記的是一格一格的顏色</b>，放大就看到格子。</p>
+      <p><b>Illustrator 記的是形狀的路線</b>（路徑和錨點），放多大都一樣清楚，形狀也可以隨時改。</p>
+      <p class="dim">標準字要印在盒子上、也可能印成 A3 海報，所以用 Illustrator。</p>
+    </div>
+  </div>
+</section>
+
+<section id="tools">
+  <h2>今天只用這 6 個</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>工具</th><th>快速鍵</th><th>做什麼</th></tr></thead>
+    <tbody>
+      <tr><td>選取工具（黑箭頭）</td><td class="num">V</td><td>選整個物件，移動、縮放</td></tr>
+      <tr><td>直接選取工具（白箭頭）</td><td class="num">A</td><td>選單一錨點，改形狀</td></tr>
+      <tr><td>文字工具</td><td class="num">T</td><td>打字</td></tr>
+      <tr><td>字元面板</td><td class="num">Ctrl+T</td><td>換字體、字級、字距</td></tr>
+      <tr><td>建立外框</td><td class="num">Shift+Ctrl+O</td><td>把文字變成可以改形狀的圖形</td></tr>
+      <tr><td>形狀建立程式工具</td><td class="num">Shift+M</td><td>拖過去就能合併形狀</td></tr>
+    </tbody>
+  </table></div>
+  <p>開始前：<span class="path">檔案＞新增</span>，選「列印」分頁的 <b>A4</b>，方向改橫式，其他照預設。</p>
+</section>
+
+<section id="ex1">
+  <h2>練習 1：打字、換 3 種字體</h2>
+  <ol class="steps">
+    <li><div><b>點一下打字</b><span>文字工具（T）在畫面上<b>點一下</b>（不要拖出框），打出角色的名字。</span></div></li>
+    <li><div><b>放大</b><span>按 Esc 離開輸入，Ctrl+T 打開字元面板，字級改成 72 pt。</span></div></li>
+    <li><div><b>複製兩份</b><span>選取工具（V），按住 Alt 往下拖，複製兩次。</span></div></li>
+    <li><div><b>各換一種字體</b><span>三份各用不同字體。今天先用電腦裡現成的，下週才教免費字體。</span></div></li>
+  </ol>
+</section>
+
+<section id="ex2">
+  <h2>練習 2：把字變成圖形</h2>
+  <div class="callout warn"><b class="tag">先備份</b><p>建立外框之後就不能再打字或換字體。所以先按住 Alt 拖一份原文字到畫面外面，留著備用。</p></div>
+  <ol class="steps">
+    <li><div><b>建立外框</b><span>選取文字，<span class="path">文字＞建立外框</span>（Shift+Ctrl+O）。字上出現藍色的點，這些就是錨點。</span></div></li>
+    <li><div><b>拆開</b><span><span class="path">物件＞解散群組</span>（Shift+Ctrl+G），每個字可以單獨移動。</span></div></li>
+    <li><div><b>拉一個錨點</b><span>直接選取工具（A）點一個錨點往外拖，看形狀怎麼變。不喜歡就 Ctrl+Z。</span></div></li>
+  </ol>
+</section>
+
+<section id="ex3">
+  <h2>練習 3：合併一個圓</h2>
+  <ol class="steps">
+    <li><div><b>畫圓</b><span>橢圓形工具（L），按住 Shift 畫一個正圓，疊在某個字的一角。</span></div></li>
+    <li><div><b>一起選</b><span>選取工具框選那個字和圓。</span></div></li>
+    <li><div><b>拖過去合併</b><span>形狀建立程式工具（Shift+M），從字拖到圓，兩個變成一個形狀。按住 Alt 點某一塊則是刪掉它。</span></div></li>
+  </ol>
+  <p>這個動作就是 W8「在字上加耳朵、把點換成愛心」的基礎。</p>
+</section>
+
+<section id="free">
+  <h2>自由練習：名字的 2 個樣子</h2>
+  <p>用剛剛的三招（換字體、拉錨點、合併形狀），把名字做出 <b>2 個看得出差別的版本</b>。不用好看，有差別就好。</p>
+  <p>還有時間的話，把上週的色票用上：選取物件，雙擊工具列左下的填色方塊，在 # 欄位貼上色碼。</p>
+</section>
+
+<section id="submit">
+  <h2>存檔與繳交</h2>
+  <div class="panel">
+    <ul class="check">
+      <li><label><input type="checkbox" id="c1"><span>有 2 個版本，至少一個有建立外框</span></label></li>
+      <li><label><input type="checkbox" id="c2"><span><span class="path">檔案＞儲存為</span>，格式 Adobe Illustrator（.ai）</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span><span class="path">檔案＞轉存＞轉存為</span>，格式 PNG，勾「使用工作區域」</span></label></li>
+      <li><label><input type="checkbox" id="c4"><span>兩個檔名都是 <span class="kbd">座號_姓名_W06練習</span>，上傳到<b>創課平台</b></span></label></li>
+    </ul>
+  </div>
+  <p style="margin-top:12px;color:var(--muted);font-size:15px">當堂交，沒有回家作業。面板不見或亂掉：<span class="path">視窗＞工作區＞重設基本功能</span>。</p>
+</section>
+
+<section class="next" id="next">
+  <span class="eyebrow">下週 · W7 · 10/29（四）</span>
+  <h2>標準字初稿</h2>
+  <p>教你去哪裡找可以放心拿去做商品的免費字體，再把名字調成標準字。很多「免費字體」其實只限個人使用。</p>
+</section>
+
+<footer>衍生式產品設計（進修部）· 弘光科技大學 多媒體遊戲發展與應用系 · 115 學年度第 1 學期</footer>
+
+<script>
+document.querySelectorAll('.check input').forEach(function(el){
+  var key='w06-'+el.id;
+  try{ el.checked = localStorage.getItem(key)==='1'; }catch(e){}
+  el.addEventListener('change',function(){ try{ localStorage.setItem(key, el.checked?'1':'0'); }catch(e){} });
+});
+</script>

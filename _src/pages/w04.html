@@ -1,0 +1,99 @@
+<!--title: W4 4 個姿勢，一次去背-->
+<header class="topbar"><a href="index.html">衍生式產品設計｜進修部 115-1</a><span>第 4 週 · 10/8（四）BC 節 · MB209</span></header>
+
+<span class="eyebrow">WEEK 04 · AI 生成角色（2）＋去背</span>
+<h1>4 個姿勢，一次去背</h1>
+<p class="lead">盲盒好玩的地方是「同一個角色，好幾款」。今天把角色補到 4 個姿勢，再用 Photoshop 去背成透明 PNG。</p>
+
+<section id="pick">
+  <h2>先挑 4 個姿勢</h2>
+  <p>挑的標準只有一個：<b>4 款塗成全黑之後，還分得出來</b>。至少包含站、坐、動態三類。</p>
+  <div class="tbl"><table>
+    <thead><tr><th>類型</th><th>可以選</th></tr></thead>
+    <tbody>
+      <tr><td>站</td><td>揮手、比讚、雙手叉腰、捧著一樣東西</td></tr>
+      <tr><td>坐</td><td>抱膝坐、坐著喝飲料、趴著</td></tr>
+      <tr><td>動態</td><td>跳起來、跑步、轉圈</td></tr>
+      <tr><td>躺</td><td>睡覺、躺著滑手機</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="pose">
+  <h2>換姿勢：鎖住角色，只改姿勢</h2>
+  <p>每次都附上<b>定裝圖</b>，貼上這段，把底線換成姿勢：</p>
+  <div class="prompt">
+    <p>這是我的角色（附上定裝圖）。請保持同一個角色：臉、頭身比例、配色、服裝、配件都不要改。只把姿勢改成：<span class="blank">姿勢</span>。一樣是全身入鏡、純白背景、畫面中只有一個角色。</p>
+    <button class="copy" type="button" data-text="這是我的角色（附上定裝圖）。請保持同一個角色：臉、頭身比例、配色、服裝、配件都不要改。只把姿勢改成：＿＿。一樣是全身入鏡、純白背景、畫面中只有一個角色。">複製這段</button>
+  </div>
+  <div class="callout"><b class="tag">角色跑掉的時候</b>
+    <p>每次都拿<b>定裝圖</b>當參考，不要拿上一張姿勢圖接著改，越接越不像。對話太長開始走樣，就開新對話、重新上傳定裝圖。</p>
+  </div>
+  <h3 style="margin-top:22px">每生一張，對照四項</h3>
+  <div class="tbl"><table class="kv">
+    <thead><tr><th>檢查</th><th>跟定裝圖比</th></tr></thead>
+    <tbody>
+      <tr><td>臉</td><td>眼睛形狀、表情風格是同一個角色</td></tr>
+      <tr><td>比例</td><td>頭身比沒變</td></tr>
+      <tr><td>配色</td><td>主色與衣服顏色一樣</td></tr>
+      <tr><td>配件</td><td>最有辨識度的配件還在</td></tr>
+    </tbody>
+  </table></div>
+  <p>額度用完的話，先把已經有的姿勢拿去去背；缺的回家補生。<b>去背一定要今天在課堂學會</b>。</p>
+</section>
+
+<section id="cutout">
+  <h2>Photoshop 去背</h2>
+  <p>先試做法 A。如果按了之後跳出登入或訂閱畫面，改用做法 B，兩種結果一樣。</p>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>做法 A：移除背景</th><th>做法 B：選取主體</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>開啟圖檔，圖層面板中點背景圖層的鎖頭解鎖</td><td>同左</td></tr>
+      <tr><td class="num">2</td><td><span class="path">視窗＞內容</span>，在「快速動作」按<b>移除背景</b></td><td><span class="path">選取＞主體</span>，再用快速選取工具（W）加選或減選</td></tr>
+      <tr><td class="num">3</td><td>自動產生圖層遮色片</td><td>按圖層面板下方的「增加圖層遮色片」</td></tr>
+      <tr><td class="num">4</td><td>邊緣不乾淨：點選遮色片，用黑色筆刷擦掉、白色筆刷補回</td><td>同左</td></tr>
+      <tr><td class="num">5</td><td colspan="2"><b>在角色下方新增一層鮮紅色，檢查有沒有一圈白邊</b>。檢查完把紅色層關掉</td></tr>
+      <tr><td class="num">6</td><td colspan="2"><span class="path">影像＞修剪</span>，選「以透明像素」</td></tr>
+      <tr><td class="num">7</td><td colspan="2"><span class="path">檔案＞轉存＞快速轉存為 PNG</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn"><b class="tag">不要縮小圖</b>
+    <p>去背前後都不要改圖片尺寸。AI 圖的原始大小印在 55mm 盒面上剛好夠，縮小之後再放大，印出來會糊。</p>
+  </div>
+  <p>第 5 步最常被跳過。白底上看起來很乾淨，印到彩色盒子上才發現一圈白邊，那時候就來不及了。</p>
+</section>
+
+<section id="submit">
+  <h2>交件前自己勾一遍</h2>
+  <div class="panel">
+    <ul class="check">
+      <li><label><input type="checkbox" id="c1"><span>4 個不同姿勢，塗黑後分得出來</span></label></li>
+      <li><label><input type="checkbox" id="c2"><span>臉、比例、配色、配件跟定裝圖一致</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span>背景透明，放在鮮色底上沒有白邊</span></label></li>
+      <li><label><input type="checkbox" id="c4"><span>檔名 <span class="kbd">座號_姓名_W04_姿勢1</span> 到 <span class="kbd">姿勢4</span>，上傳到<b>創課平台</b></span></label></li>
+    </ul>
+  </div>
+  <p style="margin-top:12px;color:var(--muted);font-size:15px">W5 上課前交。去背沒做完的，W5 前 20 分鐘在課堂補；回家只補生圖。電腦教室的桌面檔案可能會被清掉，下課前記得上傳。</p>
+</section>
+
+<section class="next" id="next">
+  <span class="eyebrow">下週 · W5 · 10/15（四）</span>
+  <h2>替角色取色、取名字</h2>
+  <p>從角色身上取 3–5 個顏色，再替它取名字。名字就是之後要做的標準字，2 到 4 個字最好做，這週可以先想。</p>
+</section>
+
+<footer>衍生式產品設計（進修部）· 弘光科技大學 多媒體遊戲發展與應用系 · 115 學年度第 1 學期</footer>
+
+<script>
+document.querySelectorAll('.check input').forEach(function(el){
+  var key='w04-'+el.id;
+  try{ el.checked = localStorage.getItem(key)==='1'; }catch(e){}
+  el.addEventListener('change',function(){ try{ localStorage.setItem(key, el.checked?'1':'0'); }catch(e){} });
+});
+document.querySelectorAll('.copy').forEach(function(b){
+  var label=b.textContent;
+  b.addEventListener('click',function(){
+    try{ navigator.clipboard.writeText(b.dataset.text).then(function(){ b.textContent='已複製'; setTimeout(function(){b.textContent=label;},1500); }); }catch(e){}
+  });
+});
+</script>

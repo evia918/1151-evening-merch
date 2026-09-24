@@ -64,7 +64,7 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 .steps{list-style:none;padding:0;margin:0;display:grid;gap:12px;counter-reset:st}
 .steps li{counter-increment:st;display:grid;grid-template-columns:40px 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 .steps li::before{content:counter(st);font-family:var(--display);font-size:26px;line-height:1;color:var(--accent)}
-.steps b{display:block}
+.steps li>div>b{display:block}
 .steps span{color:var(--muted);font-size:15px}
 .check{list-style:none;padding:0;margin:0;display:grid;gap:4px}
 .check label{display:flex;gap:10px;align-items:flex-start;padding:8px 4px;cursor:pointer}
@@ -79,3 +79,19 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 footer{margin-top:40px;font-size:13px;color:var(--muted)}
 @media (prefers-reduced-motion:no-preference){.road li.now{transition:background .3s}}
 table.kv td:first-child{white-space:nowrap;font-weight:600}
+/* W3 起：提示詞範本（可複製） */
+.prompt{position:relative;background:var(--surface);border:1px dashed var(--accent);border-radius:10px;padding:14px 16px 14px;margin:10px 0 14px;font-size:15px}
+.prompt p{margin:0 0 6px}
+.prompt p:last-of-type{margin:0}
+.prompt .seg{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--accent);margin-right:6px}
+.prompt .blank{border-bottom:1px solid var(--muted);color:var(--muted);padding:0 4px}
+.copy{margin-top:10px;font:inherit;font-size:13px;padding:4px 12px;border-radius:99px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.copy:hover{background:var(--soft)}
+.copy:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.path{font-family:var(--mono);font-size:.88em;white-space:nowrap}
+.status{display:inline-block;width:.8em;height:.8em;border-radius:50%;vertical-align:-.05em;margin-right:6px}
+.status.g{background:#2E8B57}.status.y{background:#D9A21B}.status.r{background:#C2452D}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.grid6 div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;min-height:74px}
+.grid6 b{display:block;font-family:var(--display);color:var(--accent);font-size:18px}
+@media (max-width:520px){.grid6{grid-template-columns:repeat(2,1fr)}}

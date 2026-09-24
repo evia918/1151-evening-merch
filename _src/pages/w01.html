@@ -1,0 +1,63 @@
+<!--title: W1 課程介紹-->
+<header class="topbar"><a href="index.html">衍生式產品設計｜進修部 115-1</a><span>第 1 週 · 9/17（四）BC 節 · MB209</span></header>
+
+<span class="eyebrow">WEEK 01 · 課程介紹</span>
+<h1>同一個角色，出現在不同東西上</h1>
+<p class="lead">這門課不需要會畫圖。你會替一個角色做出它的名字、顏色和周邊，最後得到一個自己設計、拆得開的盲盒。</p>
+
+<section id="what">
+  <h2>衍生商品是什麼</h2>
+  <p>你一定看過這些東西，只是沒有叫它們「衍生商品」：</p>
+  <div class="tbl"><table>
+    <thead><tr><th>例子</th><th>本體</th><th>衍生出來的東西</th></tr></thead>
+    <tbody>
+      <tr><td>博物館文創</td><td>一件館藏文物</td><td>紙膠帶、明信片、造型餅乾</td></tr>
+      <tr><td>地方吉祥物</td><td>一個代表城市的角色</td><td>貼紙、布偶、車站看板</td></tr>
+      <tr><td>超商集點</td><td>一組角色</td><td>公仔、杯子、購物袋</td></tr>
+      <tr><td>盲盒</td><td>一個角色的好幾種樣子</td><td>盒子本身、隨機一款、隱藏款</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><b class="tag">一句話記住</b><p>角色是本體，標準字、明信片、海報、盲盒都是它的衍生。這學期就是走一次這個過程。</p></div>
+</section>
+
+<section id="make">
+  <h2>這學期要做的東西</h2>
+  <div class="tbl"><table class="kv">
+    <thead><tr><th>要做的東西</th><th>用什麼做</th></tr></thead>
+    <tbody>
+      <tr><td>角色（1 個角色 × 4 個姿勢）</td><td>ChatGPT 或 Gemini 免費版，自己選</td></tr>
+      <tr><td>標準字（角色的名字）</td><td>Illustrator，這學期從零開始教</td></tr>
+      <tr><td>明信片或海報</td><td>Photoshop（二年級學過）</td></tr>
+      <tr><td>55mm 盲盒＋角色小卡</td><td>Photoshop，老師提供公版；自己到校內書局印卡紙</td></tr>
+    </tbody>
+  </table></div>
+  <p>件數、評分和組隊方式在第 2 週一次說明，也都寫在<a href="index.html#rules">課程首頁</a>。</p>
+</section>
+
+<section id="prep">
+  <h2>第 2 週前要準備的事</h2>
+  <div class="panel">
+    <ul class="check">
+      <li><label><input type="checkbox" id="c1"><span>填完背景調查表單</span></label></li>
+      <li><label><input type="checkbox" id="c2"><span>確認能登入<b>創課平台</b>，之後作業都交到這裡</span></label></li>
+      <li><label><input type="checkbox" id="c3"><span>想一個生活裡「想把它變成公仔」的東西：你家的貓、公司裡某種人、家鄉的一樣東西都可以</span></label></li>
+    </ul>
+  </div>
+</section>
+
+<section class="next" id="next">
+  <span class="eyebrow">下週 · W2 · 9/24（四）</span>
+  <h2><a href="w02.html">找到你的 IP：選題情緒板</a></h2>
+  <p>用手機找圖，替這學期挑一個角色題目，寫下 3 個關鍵字。</p>
+</section>
+
+<footer>衍生式產品設計（進修部）· 弘光科技大學 多媒體遊戲發展與應用系 · 115 學年度第 1 學期</footer>
+
+<script>
+// 勾選狀態只存在這台裝置，讀寫失敗時照常運作
+document.querySelectorAll('.check input').forEach(function(el){
+  var key='w01-'+el.id;
+  try{ el.checked = localStorage.getItem(key)==='1'; }catch(e){}
+  el.addEventListener('change',function(){ try{ localStorage.setItem(key, el.checked?'1':'0'); }catch(e){} });
+});
+</script>
