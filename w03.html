@@ -103,6 +103,37 @@ table.kv td:first-child{white-space:nowrap;font-weight:600}
 .grid6 div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;min-height:74px}
 .grid6 b{display:block;font-family:var(--display);color:var(--accent);font-size:18px}
 @media (max-width:520px){.grid6{grid-template-columns:repeat(2,1fr)}}
+/* W3 v1.1：蹺蹺板表（語意差異表） */
+.tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.tabs button{font:inherit;font-size:14px;padding:4px 14px;border-radius:99px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tabs button .dot{font-size:11px;margin-left:4px}
+.seesaw{display:grid;gap:2px}
+.seesaw .row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.seesaw .row:last-child{border-bottom:0}
+.seesaw .l{text-align:right;font-weight:600}
+.seesaw .r{text-align:left;font-weight:600}
+.seesaw .opts{display:flex;gap:6px}
+.seesaw .opts button{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:12px;cursor:pointer;padding:0}
+.seesaw .opts button.mid{width:34px;height:34px;align-self:center}
+.seesaw .opts button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.seesaw .opts button.mid[aria-pressed="true"]{background:var(--muted);border-color:var(--muted)}
+.tally{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.chip{font-size:14px;padding:2px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.chip.top{border-color:var(--accent);background:var(--soft);color:var(--ink);font-weight:600}
+.chip .c{font-family:var(--mono);font-size:12px;margin-left:4px}
+.result{font-size:17px}
+.result b{color:var(--accent)}
+.reset{font:inherit;font-size:13px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0;margin-left:8px}
+/* 抽角色表（型態分析表） */
+.draw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.draw button{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;min-height:74px;color:var(--ink)}
+.draw button small{display:block;font-size:12px;color:var(--muted)}
+.draw button span{display:block;font-family:var(--display);font-size:19px;color:var(--accent)}
+@media (max-width:520px){.draw{grid-template-columns:1fr}.draw button{min-height:0}}
+.drawn{font-size:17px;margin:6px 0 10px}
+.btn{font:inherit;font-size:14px;padding:6px 16px;border-radius:99px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer}
 </style>
 </head>
 <body>
@@ -128,13 +159,60 @@ table.kv td:first-child{white-space:nowrap;font-weight:600}
   <p>好不好看不評分。四個條件都符合就過關。</p>
 </section>
 
+<section id="keywords">
+  <h2>先把情緒板變成 3 個關鍵字</h2>
+  <p>「顏色簡單」「版面現代」是你欣賞那張圖的理由，但 AI 需要的是<b>你的角色長什麼樣子</b>。下面這張表幫你把圖轉成看得見的外型詞。</p>
+  <h3 style="margin-top:18px">第 1 步：先分三堆（1 分鐘）</h3>
+  <p>情緒板裡的圖不一定都是角色。看你寫的「留這張的理由」，理由寫什麼，就放哪一堆；一張圖兩堆都像，以理由為準。</p>
+  <div class="tbl"><table>
+    <thead><tr><th>堆</th><th>理由寫的是</th><th>今天怎麼用</th></tr></thead>
+    <tbody>
+      <tr><td style="white-space:nowrap"><b>角色堆</b></td><td>長相、表情、身形</td><td>挑 1–2 張，下面 5 行全部點</td></tr>
+      <tr><td style="white-space:nowrap"><b>配色堆</b></td><td>顏色</td><td>挑 1 張，<b>只點「柔和淡色／鮮豔撞色」那一行</b>，其他行不點</td></tr>
+      <tr><td style="white-space:nowrap"><b>字體版面堆</b></td><td>字、排版、一眼看出產品</td><td><b>今天不點</b>，另存一個資料夾，W7 標準字、W10 版面會用到</td></tr>
+    </tbody>
+  </table></div>
+  <p style="color:var(--muted);font-size:15px">圖再多也只點 3 張。沒點的行不會算票，所以配色圖放在「圖 3」只點一行就好。</p>
+
+  <h3 style="margin-top:18px">第 2 步：點蹺蹺板</h3>
+  <p>把挑出的 3 張一張一張點。每一行是一個蹺蹺板：看圖往哪邊倒，就點哪邊；兩邊都不像，點中間。<b>看第一眼就好，一行 3 秒。</b></p>
+  <div class="panel">
+    <div class="tabs" role="tablist" id="sdTabs"></div>
+    <div class="seesaw" id="sdRows"></div>
+    <div class="tally" aria-live="polite">
+      <div id="sdChips" class="chips"></div>
+      <p class="result" id="sdResult">點完之後，被點最多次的 3 個詞會出現在這裡。</p>
+      <p style="margin:0;font-size:14px;color:var(--muted)">結果會自動填進下面的提示詞範本。同分時自己挑一個。<button class="reset" type="button" id="sdReset">全部清除</button></p>
+    </div>
+  </div>
+  <div class="callout"><b class="tag">選到這兩個詞，風格段要跟著改</b>
+    <p>「硬挺光滑」：把範本的「軟膠材質」改成「亮面塑膠」。「粗線手繪」又想做平面插畫：風格段換成「平面插畫，粗線條」。</p>
+  </div>
+  <p style="color:var(--muted);font-size:15px">這 3 個詞請留著。W7 選標準字的字體時會再用一次：圓滾滾配圓體、乾淨俐落配黑體、粗線手繪配手寫感的字，字和角色才會是同一種個性。</p>
+
+  <h3 style="margin-top:26px" id="nochar">沒有情緒板、或找圖沒感覺的人：抽一個角色</h3>
+  <p>沒關係，被指定比自己想容易。按「抽一組」，三格各抽一個；不喜歡哪一格，點那一格單獨重抽。</p>
+  <div class="draw" id="drawBox">
+    <button type="button" data-k="0"><small>本體</small><span>？</span></button>
+    <button type="button" data-k="1"><small>狀態</small><span>？</span></button>
+    <button type="button" data-k="2"><small>口頭禪</small><span>？</span></button>
+  </div>
+  <p class="drawn" id="drawText" aria-live="polite"></p>
+  <button class="btn" type="button" id="drawAll">抽一組</button>
+  <div class="callout" style="margin-top:16px"><b class="tag">抽到之後，回答兩題</b>
+    <p>它像哪種同事？→ 決定<b>服裝和配件</b>。它最討厭什麼？→ 決定<b>表情</b>。</p>
+    <p>然後<b>想像這個角色</b>，回到上面的蹺蹺板表點一輪（用「圖 1」就好），一樣會得到 3 個外型詞。</p>
+  </div>
+  <p style="color:var(--muted);font-size:15px">也可以打開手機相簿往回滑，挑一張自己拍的、不是風景的東西當本體。</p>
+</section>
+
 <section id="structure">
   <h2>提示詞分三段寫</h2>
   <p>每一段回答一個問題。出錯時，你會知道要改哪一段。</p>
   <div class="tbl"><table class="kv">
     <thead><tr><th>段落</th><th>回答什麼</th><th>放什麼</th></tr></thead>
     <tbody>
-      <tr><td>主體</td><td>它是誰、長什麼樣子？</td><td>身分、<b>上週的 3 個關鍵字</b>、服裝配件、表情</td></tr>
+      <tr><td>主體</td><td>它是誰、長什麼樣子？</td><td>身分、<b>上面選出的 3 個關鍵字</b>、服裝配件、表情</td></tr>
       <tr><td>風格</td><td>做成什麼質感、怎麼拍？</td><td>頭身比、材質、光線、正面全身、純白背景</td></tr>
       <tr><td>排除</td><td>最常出錯的是什麼？</td><td>只放 2–3 項真的會出錯的</td></tr>
     </tbody>
@@ -142,10 +220,10 @@ table.kv td:first-child{white-space:nowrap;font-weight:600}
 
   <h3 style="margin-top:22px">範本：把底線換成你的內容</h3>
   <div class="prompt">
-    <p><span class="seg">主體</span>一個Q版角色：一隻<span class="blank">關鍵字1</span>、<span class="blank">關鍵字2</span>、<span class="blank">關鍵字3</span>的<span class="blank">動物或身分</span>，穿著<span class="blank">服裝</span>，帶著<span class="blank">配件</span>，表情<span class="blank">表情</span>。</p>
+    <p><span class="seg">主體</span>一個Q版角色：一隻<span class="blank" id="kw1">關鍵字1</span>、<span class="blank" id="kw2">關鍵字2</span>、<span class="blank" id="kw3">關鍵字3</span>的<span class="blank">動物或身分</span>，穿著<span class="blank">服裝</span>，帶著<span class="blank">配件</span>，表情<span class="blank">表情</span>。</p>
     <p><span class="seg">風格</span>2.5 頭身的公仔造型，軟膠材質，柔和的棚拍光，正面全身站姿，手腳完整入鏡，上下留白，純白背景。</p>
     <p><span class="seg">排除</span>畫面中只有一個角色，不要任何文字。</p>
-    <button class="copy" type="button" data-text="一個Q版角色：一隻＿＿、＿＿、＿＿的＿＿，穿著＿＿，帶著＿＿，表情＿＿。2.5 頭身的公仔造型，軟膠材質，柔和的棚拍光，正面全身站姿，手腳完整入鏡，上下留白，純白背景。畫面中只有一個角色，不要任何文字。">複製範本</button>
+    <button class="copy" type="button" id="tplCopy" data-text="一個Q版角色：一隻＿＿、＿＿、＿＿的＿＿，穿著＿＿，帶著＿＿，表情＿＿。2.5 頭身的公仔造型，軟膠材質，柔和的棚拍光，正面全身站姿，手腳完整入鏡，上下留白，純白背景。畫面中只有一個角色，不要任何文字。">複製範本</button>
   </div>
   <div class="callout"><b class="tag">兩個小訣竅</b>
     <p>寫「純白背景」比寫「不要背景」更有效，能用正面說法的就不要寫成「不要」。還有，「可愛」不是關鍵字，每個人的可愛都不一樣；改寫「圓臉」「短手短腳」這種看得到的外型。</p>
@@ -156,6 +234,7 @@ table.kv td:first-child{white-space:nowrap;font-weight:600}
 <section id="today">
   <h2>今天的流程</h2>
   <ol class="steps">
+    <li><div><b>先選出 3 個關鍵字</b><span>用上面的蹺蹺板表；沒有情緒板的人先抽一個角色。</span></div></li>
     <li><div><b>先寫，不要按生成</b><span>你一天大約只有 3 張免費額度。把三段寫在記事本裡。</span></div></li>
     <li><div><b>給一個人看一眼</b><span>問旁邊同學或老師：「光看這段字，你想到的畫面跟我一樣嗎？」</span></div></li>
     <li><div><b>生成，對照四條件</b><span>只挑一個最嚴重的問題，改對應的那一段，再生下一張。最多 3 次。</span></div></li>
@@ -220,6 +299,109 @@ document.querySelectorAll('.check input').forEach(function(el){
   try{ el.checked = localStorage.getItem(key)==='1'; }catch(e){}
   el.addEventListener('change',function(){ try{ localStorage.setItem(key, el.checked?'1':'0'); }catch(e){} });
 });
+// ── 蹺蹺板表（簡化版語意差異法）：3 張圖 × 5 組詞，每行選 左/中/右 ──
+(function(){
+  var PAIRS=[['圓滾滾','瘦長'],['大眼呆萌','瞇眼精明'],['粗線手繪','乾淨俐落'],['柔和淡色','鮮豔撞色'],['軟綿綿','硬挺光滑']];
+  var N=3, cur=0, KEY='w03-sd';
+  var st=[[],[],[]];                      // st[圖][行] = 'l' | 'm' | 'r' | undefined
+  try{ var s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.length===N) st=s; }catch(e){}
+  var tabs=document.getElementById('sdTabs'), rows=document.getElementById('sdRows');
+  var tpl=document.getElementById('tplCopy'), base=tpl.dataset.text;
+
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){} }
+  function done(i){ return PAIRS.every(function(_,r){ return st[i][r]; }); }
+
+  function renderTabs(){
+    tabs.innerHTML='';
+    for(var i=0;i<N;i++){
+      var b=document.createElement('button');
+      b.type='button'; b.setAttribute('role','tab'); b.setAttribute('aria-selected', i===cur);
+      b.innerHTML='圖 '+(i+1)+(done(i)?'<span class="dot">✓</span>':'');
+      b.onclick=(function(i){ return function(){ cur=i; renderTabs(); renderRows(); }; })(i);
+      tabs.appendChild(b);
+    }
+  }
+  function renderRows(){
+    rows.innerHTML='';
+    PAIRS.forEach(function(p,r){
+      var row=document.createElement('div'); row.className='row';
+      row.innerHTML='<span class="l">'+p[0]+'</span><span class="opts"></span><span class="r">'+p[1]+'</span>';
+      var o=row.querySelector('.opts');
+      [['l','左',p[0]],['m','中','都不像'],['r','右',p[1]]].forEach(function(c){
+        var b=document.createElement('button'); b.type='button';
+        if(c[0]==='m') b.className='mid';
+        b.textContent=c[0]==='m'?'—':'●';
+        b.setAttribute('aria-label','圖'+(cur+1)+'：'+c[2]);
+        b.setAttribute('aria-pressed', st[cur][r]===c[0]);
+        b.onclick=function(){
+          st[cur][r] = st[cur][r]===c[0] ? undefined : c[0];   // 再點一次取消
+          save(); renderRows(); renderTabs(); tally();
+          // 這張點完自動跳下一張未完成的圖
+          if(done(cur)){ for(var k=1;k<=N;k++){ var n=(cur+k)%N; if(!done(n)){ cur=n; renderTabs(); renderRows(); break; } } }
+        };
+        o.appendChild(b);
+      });
+      rows.appendChild(row);
+    });
+  }
+  function tally(){
+    // 計次；同一行左右只取票數多的一邊，避免選出「圓滾滾＋瘦長」這種矛盾組合
+    var list=[];
+    PAIRS.forEach(function(p,r){
+      var l=0, rr=0;
+      for(var i=0;i<N;i++){ if(st[i][r]==='l') l++; if(st[i][r]==='r') rr++; }
+      if(l||rr) list.push({w: l>=rr?p[0]:p[1], c: Math.max(l,rr), tie: l===rr, other: p[1], order:r});
+    });
+    list.sort(function(a,b){ return b.c-a.c || a.order-b.order; });
+    var top=list.slice(0,3);
+    var chips=document.getElementById('sdChips'); chips.innerHTML='';
+    list.forEach(function(x,i){
+      var s=document.createElement('span'); s.className='chip'+(i<3?' top':'');
+      s.innerHTML=x.w+(x.tie?'／'+x.other:'')+'<span class="c">×'+x.c+'</span>';
+      chips.appendChild(s);
+    });
+    var res=document.getElementById('sdResult');
+    if(!list.length){ res.textContent='點完之後，被點最多次的 3 個詞會出現在這裡。'; }
+    else if(top.length<3){ res.innerHTML='目前只有 '+top.length+' 個詞，再多點幾行或換一張圖。'; }
+    else{
+      var tieNote = (list[3] && list[3].c===top[2].c) || top.some(function(x){return x.tie;}) ? '（有同分，挑你比較想要的）' : '';
+      res.innerHTML='你的 3 個關鍵字：<b>'+top.map(function(x){return x.w;}).join('、')+'</b>'+tieNote;
+    }
+    // 填進提示詞範本與複製內容
+    var t=base;
+    for(var k=0;k<3;k++){
+      var el=document.getElementById('kw'+(k+1));
+      if(top[k]){ el.textContent=top[k].w; t=t.replace('＿＿', top[k].w); }
+      else{ el.textContent='關鍵字'+(k+1); t=t.replace('＿＿','\u0000'); }
+    }
+    tpl.dataset.text=t.replace(/\u0000/g,'＿＿');
+  }
+  document.getElementById('sdReset').onclick=function(){ st=[[],[],[]]; cur=0; save(); renderTabs(); renderRows(); tally(); };
+  renderTabs(); renderRows(); tally();
+})();
+
+// ── 抽角色表（型態分析表）：本體 × 狀態 × 口頭禪 ──
+(function(){
+  var COLS=[
+    ['御飯糰','手搖杯','機車安全帽','室內拖鞋','悠遊卡','便當盒','折疊傘','鬧鐘','枕頭','仙人掌','肉圓','電風扇'],
+    ['夜班中','剛下班','月底沒錢','放假前一天','開會中','趕報告','週一早上','被叫去加班','等公車','剛領薪水'],
+    ['再五分鐘','隨便','我沒事','好喔','等一下','明天再說','都可以','先這樣','又來了','我來我來']
+  ];
+  var pick=[null,null,null], KEY='w03-draw';
+  try{ var s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.length===3) pick=s; }catch(e){}
+  var btns=document.querySelectorAll('#drawBox button');
+  function roll(k){ var a=COLS[k], v; do{ v=a[Math.floor(Math.random()*a.length)]; }while(a.length>1 && v===pick[k]); pick[k]=v; }
+  function show(){
+    btns.forEach(function(b,k){ b.querySelector('span').textContent=pick[k]||'？'; });
+    document.getElementById('drawText').innerHTML = pick.every(Boolean)
+      ? '你的角色：<b>'+pick[1]+'的'+pick[0]+'</b>，口頭禪是「'+pick[2]+'」。' : '';
+    try{ localStorage.setItem(KEY, JSON.stringify(pick)); }catch(e){}
+  }
+  btns.forEach(function(b,k){ b.onclick=function(){ roll(k); show(); }; });
+  document.getElementById('drawAll').onclick=function(){ for(var k=0;k<3;k++) roll(k); show(); };
+  show();
+})();
+
 // 複製範本：不支援剪貼簿時不報錯
 document.querySelectorAll('.copy').forEach(function(b){
   var label=b.textContent;
